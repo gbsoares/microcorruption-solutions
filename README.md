@@ -18,12 +18,11 @@ Microcorruption is a series of embedded security challenges focused on a variant
 
 ## Challenge Progress
 
-| Challenge | Status | Difficulty | Writeup |
-|-----------|--------|------------|---------|
-| [Tutorial](writeups/00-tutorial.md) | WIP | Beginner | [Writeup](writeups/00-tutorial.md) |
-| [New Orleans](writeups/01-new-orleans.md) | TODO | Beginner | [Writeup](writeups/01-new-orleans.md) |
-| [Sydney](writeups/02-sydney.md) | TODO | Beginner | [Writeup](writeups/02-sydney.md) |
-| [Hanoi](writeups/03-hanoi.md) | TODO | Beginner | [Writeup](writeups/03-hanoi.md) |
+| Challenge | Status | Difficulty |
+|-----------|--------|------------|
+| [New Orleans](writeups/01-new-orleans.md) | WIP | Beginner |
+| [Sydney](writeups/02-sydney.md) | TODO | Beginner |
+| [Hanoi](writeups/03-hanoi.md) | TODO | Beginner |
 
 ## Key Concepts Covered
 

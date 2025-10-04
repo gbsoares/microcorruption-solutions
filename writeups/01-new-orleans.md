@@ -1,8 +1,7 @@
 # New Orleans - First Real Challenge
 
-**Difficulty:** Beginner  
-**Date Completed:** [Date]  
-**Time Taken:** [Duration]
+**Difficulty:** Beginner
+**Date Completed:** 10/03/2025
 
 ## Challenge Description
 

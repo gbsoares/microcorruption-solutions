@@ -2,7 +2,6 @@
 
 **Difficulty:** Beginner  
 **Date Completed:** [Date]  
-**Time Taken:** [Duration]
 
 ## Challenge Description
 
