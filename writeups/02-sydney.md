@@ -34,7 +34,7 @@ The LockIT Pro a.02  is the first of a new series  of locks. It is
 
 ## Solution
 
-I started again by taking a look at `check_password` and inspecting the memory addresses after giving it the `password` input:
+I started again by taking a look at `check_password` and inspecting the assembly after giving it a random input:
 
 ```asm
 448a <check_password>
@@ -52,7 +52,8 @@ I started again by taking a look at `check_password` and inspecting the memory a
 44b0:  3041           ret
 ```
 
-`r15` stores the memory address of the input, and we see a series of comparisons between 16-bit values and the input (offset 2 bytes at a time). What is interesting in this listing is that if the comparisons fail (i.e. Z flag not set), the code jumps to `<check_password+0x22>` (i.e. `44ac`), which clears `r14`. If, however all of the comparisons are true, we hit the last `jz` instruction which skips over clearing `r14`. In that path `r14` would get set to 1 and copied to `r15` (the return value). The caller is then checking the value of `r15` to determine whether to grant access or not.
+`r15` stores the memory address of the input, and we see a series of comparisons between 16-bit values and the input (offset 2 bytes at a time). What is interesting in this listing is that if the comparisons fail (i.e. `Z` flag not set in the status register), the code jumps to `<check_password+0x22>` (i.e. `44ac`), which clears `r14`.  
+If, however all of the comparisons are true, we hit the last `jz` instruction which skips over clearing `r14`. In that path `r14` would get set to 1 and copied to `r15` (the return value). The caller is then checking the value of `r15` to determine whether to grant access or not.
 
 Therefore we need to make sure the input (stored in memory location pointed to by r15) matches the comparisons with: `2445`, `463e`, `3c28`, and `217b` so that we take the "false" branch through all the `jnz` instructions and the "true" branch for the `jz` instruction.
 
