@@ -23,7 +23,10 @@ Microcorruption is a series of embedded security challenges focused on a variant
 | Tutorial | DONE | Beginner |
 | [New Orleans](writeups/01-new-orleans.md) | DONE | Beginner |
 | [Sydney](writeups/02-sydney.md) | DONE | Beginner |
-| [Hanoi](writeups/03-hanoi.md) | TODO | Beginner |
+| [Hanoi](writeups/03-hanoi.md) | DONE | Beginner |
+| [Cusco](writeups/04-cusco.md) | TODO | Beginner |
+| [Reykjavik](writeups/05-reykjavik.md) | TODO | Beginner |
+| [Whitehorse](writeups/06-whitehorse.md) | TODO | Beginner |
 
 ## Key Concepts Covered
 
