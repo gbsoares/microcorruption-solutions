@@ -12,8 +12,6 @@ Note: the solutions can differ from user-to-user, so the password I post does no
 
 ```text
 ├── writeups/          # Individual challenge writeups
-├── images/            # Screenshots and diagrams
-├── exploits/          # Exploit payloads and scripts
 ├── tools/             # Useful tools and utilities
 └── README.md          # This file
 ```
