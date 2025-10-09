@@ -26,7 +26,7 @@ Note: the solutions can differ from user-to-user, so the password I post does no
 | [New Orleans](writeups/01-new-orleans.md) | DONE | Beginner |
 | [Sydney](writeups/02-sydney.md) | DONE | Beginner |
 | [Hanoi](writeups/03-hanoi.md) | DONE | Beginner |
-| [Cusco](writeups/04-cusco.md) | TODO | Beginner |
+| [Cusco](writeups/04-cusco.md) | DONE | Beginner |
 | [Reykjavik](writeups/05-reykjavik.md) | TODO | Beginner |
 | [Whitehorse](writeups/06-whitehorse.md) | TODO | Beginner |
 
