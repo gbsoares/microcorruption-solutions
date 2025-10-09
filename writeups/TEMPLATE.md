@@ -2,7 +2,6 @@
 
 **Difficulty:** [Beginner/Intermediate/Advanced/Expert]  
 **Date Completed:** [Date]  
-**Time Taken:** [Duration]
 
 ## Challenge Description
 

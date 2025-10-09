@@ -66,9 +66,8 @@ we see the comparison of the data pointed to by `r13` (i.e. my input) to the har
 Reading the hardcoded address `0x2400` we get:
 
 ```sh
-> r 2400
-2400 7a7b 5d6e 4376 5800 0000 0000 0000 0000  z{]nCvX.........
-2410 0000 0000 0000 0000 0000 0000 0000 0000  ................
+> r 2400 7
+2400 7a7b 5d6e 4376 58  z{]nCvX
 ```
 
 **Solution: `z{]nCvX`.**

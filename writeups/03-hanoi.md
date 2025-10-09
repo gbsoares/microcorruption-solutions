@@ -1,4 +1,4 @@
-# Hanoi - Stack Manipulation
+# Hanoi
 
 **Difficulty:** Beginner  
 **Date Completed:** 10/05/2025

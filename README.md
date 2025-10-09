@@ -6,6 +6,8 @@ This repository documents my solutions and progress through the embedded securit
 
 Microcorruption is a series of embedded security challenges focused on a variant of the MSP430 microcontroller. Each level presents a lock that must be bypassed by finding and exploiting vulnerabilities in the firmware.
 
+Note: the solutions can differ from user-to-user, so the password I post does not necessarily solve the puzzle on your session. Rather you need to follow the same procedures to obtain the password.
+
 ## Repository Structure
 
 ```text
