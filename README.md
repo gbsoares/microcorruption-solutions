@@ -18,26 +18,15 @@ Note: the solutions can differ from user-to-user, so the password I post does no
 
 ## Challenge Progress
 
-| Challenge | Status | Difficulty |
-|-----------|--------|------------|
-| Tutorial | DONE | Beginner |
-| [New Orleans](writeups/01-new-orleans.md) | DONE | Beginner |
-| [Sydney](writeups/02-sydney.md) | DONE | Beginner |
-| [Hanoi](writeups/03-hanoi.md) | DONE | Beginner |
-| [Cusco](writeups/04-cusco.md) | DONE | Beginner |
-| [Reykjavik](writeups/05-reykjavik.md) | TODO | Beginner |
-| [Whitehorse](writeups/06-whitehorse.md) | TODO | Beginner |
-
-## Key Concepts Covered
-
-- **Buffer Overflows**: Stack-based overflow exploitation
-- **Format String Vulnerabilities**: Printf-style format string bugs
-- **Integer Overflows**: Arithmetic overflow exploitation
-- **Return-Oriented Programming (ROP)**: Code reuse attacks
-- **Heap Exploitation**: Heap-based vulnerabilities
-- **Side-Channel Attacks**: Timing and power analysis
-- **Reverse Engineering**: Assembly analysis and binary exploration
-- **Hardware Security**: Embedded system security concepts
+| Challenge | Status |
+|-----------|--------|
+| Tutorial | DONE |
+| [New Orleans](writeups/01-new-orleans.md) | DONE |
+| [Sydney](writeups/02-sydney.md) | DONE |
+| [Hanoi](writeups/03-hanoi.md) | DONE |
+| [Cusco](writeups/04-cusco.md) | DONE |
+| [Reykjavik](writeups/05-reykjavik.md) | DONE |
+| [Whitehorse](writeups/06-whitehorse.md) | TODO |
 
 ## Getting Started
 
