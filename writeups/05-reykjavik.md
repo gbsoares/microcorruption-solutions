@@ -15,7 +15,7 @@ I started this by setting breakpoint in main, resetting, and stepping through th
 444e:  0f43           clr	r15
 ```
 
-Taking a peak at the memory at 4520 we see that it's the output string prompting user for the password.
+Taking a peak at the memory at `4520` we see that it's the output string prompting user for the password.
 
 ```sh
 > r 4520
@@ -23,11 +23,11 @@ Taking a peak at the memory at 4520 we see that it's the output string prompting
 4530 6f72 643f 0000 0013 4c85 1bc5 80df e9bf  ord?....L.......
 ```
 
-Although I'm not sure what the point of the first two `mov` instructions given that the next two are overwriting the values of `r14` and `r15`. So I just ignore.
+I'm not sure what the point is of the first two `mov` instructions are given that the next two are overwriting the values of `r14` and `r15`. Seems pointless.
 
 We then see two `call` instructions in `main`:
 
-- one to `#0x4486 <enc>`, which by the name tells me it's some sort of encryption method?
+- one to `#0x4486 <enc>`, which by the name tells me it's some sort of encryption method
 - one to `#0x2400`, which is an address in RAM, so this tells me there is executable code loaded to RAM on this program.
 
 ### `<enc>` Function
@@ -95,7 +95,7 @@ The listing for `enc` is quite long, so let's try to break things up:
 4518:  3041           ret
 ```
 
-Stepping through the code and looking at the instruction I see that we first have a loop that runs 0x100 (256) times, moving all the values from 0x00 to 0xFF onto an array:
+Stepping through the code and looking at the instruction I see that we first have a loop that runs 0x100 (256) times, writing all the values from 0x00 to 0xFF onto an array at memory address `247c`:
 
 ```asm
 448e:  0d43           clr	r13
@@ -128,6 +128,7 @@ At the end of the loop, inspecting the array we have:
 ```
 
 The next section is
+
 ```asm
 449c:  3c40 7c24      mov	#0x247c, r12
 44a0:  0d43           clr	r13
@@ -174,16 +175,16 @@ Which when I step through and investigate looks like it is performing a scramble
 256c bc2e 577a d5f4 a851 c243 277d a4ca 1e6b  ..Wz...Q.C'}...k
 ```
 
-By the end of the method the 256 bytes look to be pseudo-random (although it's the same scramble across resets and executions of the program).
-My guess is that this is an array that is used for encrypting the password or something like that...
+By the end of the method the 256 byte array looks like random data (although it's the same scramble across resets and executions of the program).
 
+Not sure what to make of this method beyond the generation of this scramble table.  
 Back to main...
 
 ### RAM code
 
 The second call in main puts the `pc` to the following memory address in RAM:
 
-```
+```sh
 2400: 0b12 0412 0441 2452 3150 e0ff 3b40 2045   .....A$R1P..;@ E
 2410: 073c 1b53 8f11 0f12 0312 b012 6424 2152   .<.S........d$!R
 2420: 6f4b 4f93 f623 3012 0a00 0312 b012 6424   oKO..#0.......d$
