@@ -1,6 +1,5 @@
 # Sydney
 
-**Difficulty:** Beginner  
 **Date Completed:** 10/04/2025
 
 ## Challenge Description

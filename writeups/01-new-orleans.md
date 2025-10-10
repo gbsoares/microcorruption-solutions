@@ -1,6 +1,5 @@
 # New Orleans
 
-**Difficulty:** Beginner  
 **Date Completed:** 10/03/2025
 
 To get to this first puzzle you need to either skip the tutorial or input any 8-character string (e.g. "password").
