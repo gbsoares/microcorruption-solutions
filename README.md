@@ -26,7 +26,25 @@ Note: the solutions can differ from user-to-user, so the password I post does no
 | [Hanoi](writeups/03-hanoi.md) | DONE |
 | [Cusco](writeups/04-cusco.md) | DONE |
 | [Reykjavik](writeups/05-reykjavik.md) | DONE |
-| [Whitehorse](writeups/06-whitehorse.md) | TODO |
+| [Whitehorse](writeups/06-whitehorse.md) | WIP |
+| [Montevideo](writeups/07-montevideo.md) | TODO |
+| [Johannesburg](writeups/08-johannesburg.md) | TODO |
+| [Santa Cruz](writeups/09-santa-cruz.md) | TODO |
+| [Jakarta](writeups/10-jakarta.md) | TODO |
+| [Addis Ababa](writeups/11-addis-ababa.md) | TODO |
+| [Novosibirsk](writeups/12-novosibirsk.md) | TODO |
+| [Algiers](writeups/13-algiers.md) | TODO |
+| [Vladivostok](writeups/14-vladivostok.md) | TODO |
+| [Bangalore](writeups/15-bangalore.md) | TODO |
+| [Lagos](writeups/16-lagos.md) | TODO |
+| [Chernobyl](writeups/14-chernobyl.md) | TODO |
+| [Hollywood](writeups/15-hollywood.md) | TODO |
+| [Vancouver](writeups/16-vancouver.md) | TODO |
+| [Cold Lake](writeups/17-cold-lake.md) | TODO |
+| [Churchill](writeups/18-churchill.md) | TODO |
+| [Baku](writeups/19-baku.md) | TODO |
+| [St. John's](writeups/20-st-johns.md) | TODO |
+| [Halifax](writeups/21-halifax.md) | TODO |
 
 ## Getting Started
 
