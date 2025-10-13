@@ -26,7 +26,7 @@ Note: the solutions can differ from user-to-user, so the password I post does no
 | [Hanoi](writeups/03-hanoi.md) | DONE |
 | [Cusco](writeups/04-cusco.md) | DONE |
 | [Reykjavik](writeups/05-reykjavik.md) | DONE |
-| [Whitehorse](writeups/06-whitehorse.md) | WIP |
+| [Whitehorse](writeups/06-whitehorse.md) | DONE |
 | [Montevideo](writeups/07-montevideo.md) | TODO |
 | [Johannesburg](writeups/08-johannesburg.md) | TODO |
 | [Santa Cruz](writeups/09-santa-cruz.md) | TODO |
