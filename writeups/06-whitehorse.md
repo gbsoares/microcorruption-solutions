@@ -28,7 +28,7 @@ So at this point I'm thinking: "we're going to have to craft an input to blow pa
 44f4:  3150 f0ff      add	#0xfff0, sp
 ```
 
-which essentially subtracts 0xF (16) from the stack pointer (I know adding 0xFFF0 instead of sub #0xF is not intuitive) to make room for where the user input is going to go.
+, which essentially subtracts 0x10 (16) from the stack pointer (I know adding 0xFFF0 instead of sub #0x10 is not intuitive) to make room for where the user input is going to go.
 
 The fact that the user buffer space is allocated as the first instruction means that the end of the buffer is right next to the return address from the `call` instruction from `main`. So we are going to have something like this for the stack layout:
 

@@ -27,8 +27,8 @@ Note: the solutions can differ from user-to-user, so the password I post does no
 | [Cusco](writeups/04-cusco.md) | DONE |
 | [Reykjavik](writeups/05-reykjavik.md) | DONE |
 | [Whitehorse](writeups/06-whitehorse.md) | DONE |
-| [Montevideo](writeups/07-montevideo.md) | TODO |
-| [Johannesburg](writeups/08-johannesburg.md) | TODO |
+| [Montevideo](writeups/07-montevideo.md) | DONE |
+| [Johannesburg](writeups/08-johannesburg.md) | WiP |
 | [Santa Cruz](writeups/09-santa-cruz.md) | TODO |
 | [Jakarta](writeups/10-jakarta.md) | TODO |
 | [Addis Ababa](writeups/11-addis-ababa.md) | TODO |
