@@ -29,7 +29,7 @@ Note: the solutions can differ from user-to-user, so the password I post does no
 | [Whitehorse](writeups/06-whitehorse.md) | DONE |
 | [Montevideo](writeups/07-montevideo.md) | DONE |
 | [Johannesburg](writeups/08-johannesburg.md) | DONE |
-| [Santa Cruz](writeups/09-santa-cruz.md) | WiP |
+| [Santa Cruz](writeups/09-santa-cruz.md) | DONE |
 | [Jakarta](writeups/10-jakarta.md) | TODO |
 | [Addis Ababa](writeups/11-addis-ababa.md) | TODO |
 | [Novosibirsk](writeups/12-novosibirsk.md) | TODO |
