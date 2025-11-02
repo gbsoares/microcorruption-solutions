@@ -2,11 +2,13 @@
 
 **Date Completed:** 11/01/2025
 
+I started this problem by analyzing the assembly for the `<login>` method.
+
 ```asm
 4562:  3150 deff      add	#0xffde, sp
 ```
 
-Results in subtracting `0xffff - 0xffde + 1 = 0x22 (34)` to the stack pointer.
+Adding `0xffde` to `sp` results in subtracting `0xffff - 0xffde + 1 = 0x22 (34)` to the stack pointer.
 
 **Process Username:**
 
