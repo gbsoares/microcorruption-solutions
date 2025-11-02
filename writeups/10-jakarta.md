@@ -18,7 +18,7 @@ Adding `0xffde` to `sp` results in subtracting `0xffff - 0xffde + 1 = 0x22 (34)`
 4586:  b012 b846      call	#0x46b8 <getsn>
 ```
 
-Username is written to 0x2402, and length of username can be up to 0xff (255).
+Username is written to `0x2402`, and length of username can be up to `0xff (255)`.
 
 ```asm
 458a:  3f40 0224      mov	#0x2402, r15
@@ -31,7 +31,7 @@ Username is written to 0x2402, and length of username can be up to 0xff (255).
 45a0:  3b80 0224      sub	#0x2402, r11
 ```
 
-Calculates length of user input by looking for 0x00 at the end of the input and subtracting start address from end address.
+Calculates length of user input by looking for `0x00` at the end of the input and subtracting start address from end address.
 
 ```asm
 45a4:  3e40 0224      mov	#0x2402, r14
@@ -49,7 +49,7 @@ Copies the user input onto the stack.
 45bc:  3040 4244      br	#0x4442 <__stop_progExec__>
 ```
 
-Compares username length with 0x21 (33), and jumps if the carry bit is not set - i.e. if the username length is less than 33. If it is greater than or equal to 33, the carry bit is set and `__stop_progExec__` is called.
+Compares username length with `0x21 (33)`, and jumps if the carry bit is not set - i.e. if the username length is less than 33. If it is greater than or equal to 33, the carry bit is set and `__stop_progExec__` is called.
 
 **Process Password:**
 
@@ -63,9 +63,9 @@ Compares username length with 0x21 (33), and jumps if the carry bit is not set -
 45d6:  b012 b846      call	#0x46b8 <getsn>
 ```
 
-Performs some calculation to determine the allowed length for the password based on the length of the username. `r11` stores the length of the username, so `sub	r11, r14` does (0x1f - (username length)). If username length is less than `0x1f` (31), then the result is a positive integer. If the username length is 31, the password has length 0. But if the username has length 32 (and we saw above that the username has to be less than 33), then we have `(0x1f - 0x20) = 0xffff`, which is probably not what the programmer intended to allow.  
+Performs some calculation to determine the allowed length for the password based on the length of the username. `r11` stores the length of the username, so `sub	r11, r14` does `(0x1f - (username length))`. If username length is less than `0x1f (31)`, then the result is a positive integer. If the username length is 31, the password has length 0. But if the username has length 32 (and we saw above that the username has to be less than 33), then we have `r14 = (0x1f - 0x20) = 0xffff`.  
 The next instruction simply ANDs the result with `0x1ff`.  
-Therefore we have a vulnerability we can exploit here by setting the username to a 32 byte string in length, which then lets us input a password of length up to `0x1ff` (511) bytes.
+Therefore we have a vulnerability we can exploit here - by setting the username to a 32 byte string in length we can input a password of length up to `0x1ff (511)` bytes.
 
 However, after entering the password, there is similar code as what we had for the username which checks the length of the password is less than 33 bytes:
 
