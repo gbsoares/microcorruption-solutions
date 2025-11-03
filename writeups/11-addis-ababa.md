@@ -72,7 +72,7 @@ c - The argument is of type char to be printed as a character.
 n - The argument is of type unsigned int*. Saves the number of characters printed thus far. No output is produced.
 ```
 
-After reading the linked articles above that go into great detail into the vulnerability exploit, we should be able to use a combination of %x, %n, and %s to write some arbitrary data on the stack.
+After reading the linked articles above that go into great detail into the vulnerability exploit, we should be able to use a combination of `%x`, `%n`, and `%s` to write some arbitrary data on the stack.
 
 For option #2, the memory address on the stack that I want to write a non-zero value onto is `3008`.
 
@@ -84,7 +84,27 @@ This doesn't yield anything interesting because the value at that memory locatio
 
 However if we replace the `%s` with `%n`, we can write to memory location `0x3008` the number of characters that have been printed thus far, i.e. the value `2`.
 
-Therefore our input string becomes `\x08\x30%x%n`, or `08302578256e`
+Therefore our input string becomes `\x08\x30%x%n`, or `08302578256e`.
+
+What this is doing under the hood, in the best way that I can explain it is as follows:
+
+- we are writing `0830 2578 2573` onto the stack, and this is the first parameter into `printf`.
+- because `printf` takes variable arguments, and we've passed two format specifiers in the string, `printf` will pull values from the stack as the `valist` arguments for the function. From the MSP430 ABI document section "3.3.8 Stack Layout of Arguments Not Passed in Registers":
+
+```text
+For a variadic C function (that is, a function declared with an ellipsis indicating that it is called with varying numbers of arguments), the last explicitly declared argument and all remaining arguments are passed on the stack, so that its stack address can act as a reference for accessing the undeclared arguments.
+```
+
+- the format string that we passed `\x08\x30%x%n` onto the stack will look something like this (starting at address `300a`):
+
+```sh
+3008 0000 0830 2578 256e 0000 0000 0000 0000  ...0%x%n........
+3018 0000 0000 0000 0000 0000 0000 0000 0000  ................
+```
+
+- `printf` will count the number of format specifiers in the string and find that there are 2 (`x` and `n`), and will start pulling these from the stack, but because we didn't pass any other variable arguments into `printf` the first arg will get pulled from memory address `3008` (i.e. the word at a lower memory address from the start of the format string).
+- so in our case, `%x` is really there just to consume the two bytes `0000` currently at memory address `3008`
+- then the next variable arg it would expect for the `%n` format specifier would be at memory address `300a`, which we've written as `3008`. So `%n` will read the value stored at `300a` (`3008`) and write to that memory location the number of bytes printed thus far (i.e. `2`).
 
 **Solution:**
 
