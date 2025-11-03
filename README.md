@@ -31,7 +31,7 @@ Note: the solutions can differ from user-to-user, so the password I post does no
 | [Johannesburg](writeups/08-johannesburg.md) | DONE |
 | [Santa Cruz](writeups/09-santa-cruz.md) | DONE |
 | [Jakarta](writeups/10-jakarta.md) | DONE |
-| [Addis Ababa](writeups/11-addis-ababa.md) | TODO |
+| [Addis Ababa](writeups/11-addis-ababa.md) | DONE |
 | [Novosibirsk](writeups/12-novosibirsk.md) | TODO |
 | [Algiers](writeups/13-algiers.md) | TODO |
 | [Vladivostok](writeups/14-vladivostok.md) | TODO |
