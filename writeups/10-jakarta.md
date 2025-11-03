@@ -1,7 +1,5 @@
 # Jakarta
 
-**Date Completed:** 11/01/2025
-
 I started this problem by analyzing the assembly for the `<login>` method.
 
 ```asm

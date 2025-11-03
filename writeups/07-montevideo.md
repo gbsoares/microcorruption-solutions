@@ -1,7 +1,5 @@
 # Montevideo
 
-**Date Completed:** 10/16/2025
-
 Before even running the program on the debugger I started by inspecting `<login>` and trying to understand how this program differs from Whitehorse.
 
 ```asm

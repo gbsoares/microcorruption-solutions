@@ -1,7 +1,5 @@
 # Sydney
 
-**Date Completed:** 10/04/2025
-
 ## Challenge Description
 
 The manual for this challenge starts with the following description:

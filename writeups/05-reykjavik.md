@@ -1,7 +1,5 @@
 # Reykjavik
 
-**Date Completed:** 10/08/2025
-
 I started this by setting breakpoint in main, resetting, and stepping through the code:
 
 ```asm

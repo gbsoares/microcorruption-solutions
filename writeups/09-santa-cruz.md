@@ -1,7 +1,5 @@
 # Santa Cruz
 
-**Date Completed:** 10/26/2025
-
 Reading through the `login` method we see that the user is now prompted two inputs:
 
 - username

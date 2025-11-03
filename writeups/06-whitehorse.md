@@ -1,7 +1,5 @@
 # Whitehorse
 
-**Date Completed:** 10/11/2025
-
 Started this challenge by inspecting the code - where we see immediately a call to `login()`, then in `login` we have the usual calls to `puts` followed by `getsn`, and then we see a new method call to `conditional_unlock_door()`.
 
 Inspecting this new method we see a call to the `0x7E` interrupt routine, which from the manual tells us:

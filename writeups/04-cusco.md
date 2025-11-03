@@ -1,7 +1,5 @@
 # Cusco
 
-**Date Completed:** 10/08/2025
-
 I started this level by inspecting login method:
 
 ```asm

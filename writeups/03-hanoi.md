@@ -1,7 +1,5 @@
 # Hanoi
 
-**Date Completed:** 10/05/2025
-
 We start by taking a look at `<login>`:
 
 ```asm

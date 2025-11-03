@@ -1,7 +1,5 @@
 # Addis Adaba
 
-**Date Completed:** 11/02/2025
-
 This time the program logic seems to be directly in `main` so we're unlikely to have an instruction in the stack to overwrite for a ret instruction as the instructions after main go straight into the `<__stop_progExec__>` method. Also the program is asking for the input to be of the form `username:password` which is different from the other prompts we've received so far.
 
 In `main` we see the usual pattern here of subtracting the from the `sp`, loading the registers with the length of buffer + pointer to write the user input:

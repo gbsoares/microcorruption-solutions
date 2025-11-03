@@ -1,7 +1,5 @@
 # New Orleans
 
-**Date Completed:** 10/03/2025
-
 To get to this first puzzle you need to either skip the tutorial or input any 8-character string (e.g. "password").
 
 For this first challenge, following the same process described in the tutorial I started by setting a breakpoint in the `check_password` function, resetting the board, entering some bogus password, and stepping through the function:

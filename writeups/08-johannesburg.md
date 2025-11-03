@@ -1,7 +1,5 @@
 # Johannesburg
 
-**Date Completed:** 10/26/2025
-
 Starting by looking at `<login>` we see:
 
 ```asm
