@@ -37,7 +37,7 @@ And this is what the stack now looks like:
 421c 0000 0000 0000 0000 0000 0000 0000 0000  ................
 ```
 
-Followed by printing input that is in the stack:
+Followed by printing the buffer that is on the stack:
 
 ```asm
 446e:  3f40 0afe      mov	#0xfe0a, r15
@@ -79,7 +79,7 @@ There is a bunch of stack manipulation to get ready for the `<INT>` call, but be
 We see:
 
 - the op-code `0x7E`
-- the address of the user input `420c`
+- the address of the buffer on the stack `420c`
 - the address of the flag to set if the password is correct `4206`
 - the location of the flag to set if the password is correct (initialized to `0000`)
 - the value of `r4` on entry - `4402`
@@ -104,7 +104,7 @@ So I end up with something that looks like this:
 
 `c844a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5256e`
 
-Checking the memory location that stores the INT op-code:
+Checking the memory location that stores the `INT` op-code before and after the `printf` call:
 
 - Before
 
@@ -119,6 +119,8 @@ Checking the memory location that stores the INT op-code:
 > r 44c8 2
 44c8 7f00  .
 ```
+
+Success.
 
 **Solution:**
 
