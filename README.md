@@ -33,7 +33,7 @@ Note: the solutions can differ from user-to-user, so the password I post does no
 | [Jakarta](writeups/10-jakarta.md) | DONE |
 | [Addis Ababa](writeups/11-addis-ababa.md) | DONE |
 | [Novosibirsk](writeups/12-novosibirsk.md) | DONE |
-| [Algiers](writeups/13-algiers.md) | TODO |
+| [Algiers](writeups/13-algiers.md) | WIP |
 | [Vladivostok](writeups/14-vladivostok.md) | TODO |
 | [Bangalore](writeups/15-bangalore.md) | TODO |
 | [Lagos](writeups/16-lagos.md) | TODO |
