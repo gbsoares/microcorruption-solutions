@@ -35,9 +35,9 @@ Let's start looking at what is going on here...
 4668:  b012 0a47      call	#0x470a <getsn>
 ```
 
-So my first thought is: "we allocate a buffer of length 16 on the heap, but allow the user to input 48 bytes, so we should look at heap corruption and see if we can use that to unlock the lock".
+So my first thought is: we allocate a buffer of length 16 on the heap, but allow the user to input 48 bytes, so we should look at heap corruption and see if we can use that to unlock the lock.
 
-When I look at the heap to check what is stored around the two allocated buffers I see (I entered "username" and "password" as the username and passwords to make it clear where data is being stored):
+When I look at the heap to check what is stored around the two allocated buffers I see the following (my inputs were the strings "username" and "password" to make it clear where the data is being stored):
 
 ```sh
 > r r10 48
@@ -46,9 +46,9 @@ When I look at the heap to check what is stored around the two allocated buffers
 242e 0000 0000 0000 1e24 0824 9c1f 0000 0000  .......$.$......
 ```
 
-So the username buffer has 16 bytes allocated + 3 words `0824 3424 2100`, which I don't yet know what they represent. Similarly the username buffer has 16 bytes allocated + 3 words `1e24 0824 9c1f`. I'm guessing these are headers `malloc` added to be able to track info regarding the allocation block and be able to traverse the allocated regions on the heap. So I think we need to look at `malloc` more closely and figure out what these bytes mean.
+So the username buffer has 16 bytes allocated, then there are 3 words `0824 3424 2100` which I don't yet know what they represent, followed by the allocated buffer for the password. I'm guessing that the 3 words between the username and password are some sort of header that `malloc` added to track allocated blocks and be able to manage the heap region. Next we need to look more closely at what `malloc` is doing...
 
-If we look at the start of the heap (at address 0x2400), we see: 
+If we look at the start of the heap (at address 0x2400), we see:
 
 ```sh
 2400: 0824 0010 0000 0000 0824 1e24 2100 7573   .$.......$.$!.us
@@ -65,7 +65,7 @@ At the beginning of the heap we have 3 words:
 - `@2402: 1000`
 - `@2404: 0000`
 
-The value at `2404` seems to be a flag to check if the heap has been initialized (if `0000` skips the init block). The value at `2400` points to the first block on the heap (`2408`), and the value at `2402` tracks the size of the first allocated block (`0x10`).
+After looking at the assembly code, the value at `2404` seems to be a flag to check if the heap has been initialized (if `0000` skips the init block). The value at `2400` points to the first block on the heap (`2408`), and the value at `2402` tracks the size of the first allocated block (`0x10`).
 
 ```text
  0                   1
@@ -101,5 +101,96 @@ With this info we can see that the heap layout looks something as follows:
 
 ![Malloc heap data structure](../images/microcorruption_heap.png)
 
-The size of the first two blocks in this specific example are 16-bytes `(0x21 >> 1) = 0x10`, and the last block (the remaining of the heap) is `(0x1f9c >> 1) = 0x0fce (4046)` (this last block is marked "not allocated").
+The size of the first two blocks in this specific example = 16-bytes `(0x21 >> 1) = 0x10`, and the last block (which tracks the remaining space of the heap that is un-allocated) is `(0x1f9c >> 1) = 0x0fce (4046)`.
 
+So now we need to figure out how to use this structure of the heap along with the fact that we can write past the allocated buffer (and onto the header of the next block) in order to get the program to direct execution to the `<unlock_door>` method (at memory address `0x4564`).
+
+Looking at this a bit further, I realized that just changing an allocated block's metadata doesn't directly allow us to change data in memory. It's not until another invocation of `<malloc>` or a call to `<free>` that we can change what is written in memory. So now we need to look more closely at `<free>`.
+
+At a high level, when free is called on a block, it needs to check whether the memory region being released can be coalesced with one of the adjacent memory regions (and update the prev/next and size fields), otherwise it needs to mark that region's flag to "not allocated" and keep the other fields intact. In it's logic, free will try coalescing with the Previous memory region first (and update Prev's header data to include the size of the region it is freeing), or coalesce Next's memory region with the one we are freeing.
+
+In this example we see that the heap region for the password is free'd first, so this region (if we didn't do any heap manipulation) will be joined with block #3 (the block that tracks the remaining heap region that is marked "not allocated"). So free will change the "next" ptr to point to Block #1, the size will be increased to be equal to the size of the remaining of the heap, and the flag will be cleared to mark the region as not allocated.
+
+With this info I'm going to see what it would take for us to change the return address of the `login` method from `main` to `unlock_door` instead.
+
+Let's first locate where on the stack the return address for `login` is stored. Setting a breakpoint at the start of `<login>` when `main` calls `login` it will push onto the stack the return address that gets popped via the `ret` instruction:
+
+```sh
+> break login
+  Breakpoint set
+> reset
+> c
+> r sp
+439a 4044 0000 0000 0000 0000 0000 0000 0000  @D..............
+43aa 0000 0000 0000 0000 0000 0000 0000 0000  ................
+```
+
+So we see the return address we want to try to overwrite is at memory location `0x439a`, and we want to change it from `0x4440` to `0x4564` (the address of `unlock_door`). To do this we will need to carefully set the Prev/Next pointers and block size to a value that will trick `free` into adjusting this memory region.
+
+So my strategy here is going to be to change Block #2's `Prev Ptr` to point to the stack region where we want to overwrite the return address, and set Block #2's size to be the difference between `0x4440` and the value I want to set.
+
+Before:
+
+![Heap Before](../images/microcorruption_heap-before.png)
+
+After:
+
+![Heap After](../images/microcorruption_heap-after.png)
+
+- 16-bytes of random data to fill the allocated buffer: `5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a`
+- Address to overwrite the Prev Ptr: 0x4396 --> `9643`
+- Next Ptr address (set this to Block #1): 0x2408 --> `0824`
+- Size adjustment:
+  - Current size encoded at memory address `0x439a`:
+    - `0x4440 >> 1 = 0x2220`
+  - What we want to encode at memory address `0x439a` after a call to free:
+    - `0x4564 >> 1 = 0x22b2`
+  - Difference = `0x22b2 - 0x2220 = 0x92`
+    - This means we want to set the size of Block #2 to `0x92`:
+  - Block #2's size = `(0x92 << 1) + 1 = 0x125`
+    - `+ 1` is so that the `F` flag is set marking the region as allocated
+  - After running this I see that there is a 6-byte difference between my target value and what was written (which is the size of the header for block 2 that is also added to the total number of available bytes on the heap), so the final value I'm going to use is `0x011F`
+
+Username: `5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a964308241f01`
+Password: `ffffffffffffffffffffffffffffffff`
+
+Running this I see that after the first call to free, we have the right value that we wanted to set in the stack:
+
+```sh
+# before first call to free:
+> r 439a 2
+439a 4044  @D
+# after first call to free:
+> r 439a 2
+439a 6445  dE
+# after second call to free:
+> r 439a 2
+439a ae46  .F
+```
+
+But my solution fails to realize that when the second `free` is called, Block #1's size + header bytes will be coalesced as well and will further change the target value. So we need to take his also into account.
+
+After some trial an error I come to the realization that jumping directly to the start of the `<unlock_door> method is not going to work and I'm ending up either 4 bytes short of 2 bytes ahead of my target value. 
+
+So instead of jumping to the address of the `unlock_door` method, I'm going to try jumping to the `call <unlock_door>` instruction inside the `<login>` method:
+
+```asm
+468e:  0524           jz	$+0xc <login+0x60>
+4690:  b012 6445      call	#0x4564 <unlock_door>
+4694:  3f40 0b46      mov	#0x460b, r15
+```
+
+New target address around `0x4690`.
+
+After some trial an error I was able to get the code to jump to `0x468e` which is close enough to call `unlock_door` using the following input:
+
+Username: `5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a964308240F01`
+Password: `00`
+
+**Solution:**
+
+```sh
+> solve
+5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a964308240F01
+00
+```
